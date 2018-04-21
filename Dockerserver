@@ -1,0 +1,12 @@
+FROM openjdk:8
+
+
+COPY .xcolab.application.properties  /root/.xcolab.application.properties
+
+
+
+COPY eureka-server-1.0-SNAPSHOT.jar server.jar
+
+
+
+CMD ["/usr/lib/jvm/java-8-openjdk-amd64/bin/java", "-jar", "server.jar"]

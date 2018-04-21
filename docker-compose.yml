@@ -1,0 +1,30 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerphusion
+    ports:
+      - 18082:18082
+    depends_on:
+      - db
+    volumes:
+      - ./XCoLab:/opt/xcolab
+    networks:
+      - xcolab
+  db:
+    image: mysql:5.6
+    container_name: xcolabdb
+    ports:
+      - 3306:3306
+    volumes:
+      - '~/mysql/initdb.d:/docker-entrypoint-initdb.d'
+      - '~/mysql/my.cnf/my:/etc/mysql/conf.d'
+    environment:
+      MYSQL_DATABASE: "xcolab"
+      MYSQL_USER: "root"
+      MYSQL_ROOT_PASSWORD: "123"
+    networks:
+      - xcolab
+networks:
+  xcolab:

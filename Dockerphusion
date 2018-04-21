@@ -1,0 +1,104 @@
+# base image is phusion
+FROM phusion/baseimage:latest
+
+# Use init service of phusion
+CMD ["/sbin/my_init"]
+
+#copy file from the properties
+COPY .xcolab.application.properties  /root/.xcolab.application.properties
+COPY mysql /~
+# Install unofficial openjdk-8
+RUN add-apt-repository ppa:openjdk-r/ppa && apt-get update && apt-get dist-upgrade -y && apt-get install -y openjdk-8-jdk
+
+
+COPY . /root
+
+# Add second service
+RUN mkdir /etc/service/second
+ADD admin.sh /etc/service/second/run
+RUN chmod +x /etc/service/second/run
+
+# Add Eureka Server
+RUN mkdir /etc/service/first
+ADD eurekaS.sh /etc/service/first/run
+RUN chmod +x /etc/service/first/run
+
+# Add View Service
+RUN mkdir /etc/service/third
+ADD veiw.sh /etc/service/third/run
+RUN chmod +x /etc/service/third/run
+
+# Add Proxy
+RUN mkdir /etc/service/four
+ADD proxy.sh /etc/service/four/run
+RUN chmod +x /etc/service/four/run
+
+
+# Add Comment
+RUN mkdir /etc/service/five
+ADD comment.sh /etc/service/five/run
+RUN chmod +x /etc/service/five/run
+
+# Add Content
+RUN mkdir /etc/service/six
+ADD content.sh /etc/service/six/run
+RUN chmod +x /etc/service/six/run
+
+
+# Add Contest
+RUN mkdir /etc/service/seven
+ADD contest.sh /etc/service/seven/run
+RUN chmod +x /etc/service/seven/run
+
+
+# Add Email
+RUN mkdir /etc/service/eight
+ADD emails.sh /etc/service/eight/run
+RUN chmod +x /etc/service/eight/run
+
+
+# Add Members
+RUN mkdir /etc/service/nine
+ADD members.sh /etc/service/nine/run
+RUN chmod +x /etc/service/nine/run
+
+
+# Add Members
+RUN mkdir /etc/service/ten
+ADD members.sh /etc/service/ten/run
+RUN chmod +x /etc/service/ten/run
+
+
+# Add Modelling
+RUN mkdir /etc/service/eleven
+ADD modeling.sh /etc/service/eleven/run
+RUN chmod +x /etc/service/eleven/run
+
+
+# Add Moderation
+RUN mkdir /etc/service/tevelve
+ADD moderation.sh /etc/service/tevelve/run
+RUN chmod +x /etc/service/tevelve/run
+
+# Add Search Service
+RUN mkdir /etc/service/thirteen
+ADD search.sh /etc/service/thirteen/run
+RUN chmod +x /etc/service/thirteen/run
+
+
+# Add Share Services
+RUN mkdir /etc/service/fourteen
+ADD shareService.sh /etc/service/fourteen/run
+RUN chmod +x /etc/service/fourteen/run
+
+# Add tracking
+RUN mkdir /etc/service/fifteen
+ADD tracking.sh /etc/service/fifteen/run
+RUN chmod +x /etc/service/fifteen/run
+
+
+
+EXPOSE 18082:18082
+
+# Clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

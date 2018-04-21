@@ -1,0 +1,13 @@
+
+FROM openjdk:8
+COPY .xcolab.application.properties  /root/.xcolab.application.properties
+
+COPY . /root 
+
+RUN apt-get update && apt-get install -y supervisor
+RUN mkdir -p /var/log/
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+EXPOSE 18082:18082
+
+CMD ["/usr/bin/supervisord"]
