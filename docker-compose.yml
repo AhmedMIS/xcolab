@@ -18,6 +18,7 @@ services:
     volumes:
       - '~/mysql/initdb.d:/docker-entrypoint-initdb.d'
       - '~/mysql/my.cnf/my:/etc/mysql/conf.d'
+      - '~/mysql:/var/lib/mysql'
     environment:
       MYSQL_DATABASE: "xcolab"
       MYSQL_USER: "root"
