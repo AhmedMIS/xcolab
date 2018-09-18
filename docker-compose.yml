@@ -16,9 +16,8 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - '~/mysql/initdb.d:/docker-entrypoint-initdb.d'
-      - '~/mysql/my.cnf/my:/etc/mysql/conf.d'
-      - '~/mysql:/var/lib/mysql'
+      - '~/mqsl/initdb.d:/docker-entrypoint-initdb.d'
+      - '~/mqsl/my.cnf/my:/etc/mysql/conf.d'
     environment:
       MYSQL_DATABASE: "xcolab"
       MYSQL_USER: "root"
